@@ -28,8 +28,18 @@ export default {
             this.bCharViewer = !this.bCharViewer;
             this.bCharCreator = !this.bCharCreator;
         },
-        addCharacter(newCharacter) {
+        async addCharacter(newCharacter) {
             console.log(`Attempting to add ${newCharacter} to the DB`);
+            const response = await fetch('http://localhost:8081/characters', {
+              method: 'POST',
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify(newCharacter),
+            })
+
+            const data = await response.json();
+            console.log(data)
         }
     },
     data () {
